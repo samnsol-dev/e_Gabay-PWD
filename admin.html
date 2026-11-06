@@ -26,6 +26,17 @@
     </nav>
   </header>
   <main id="main-content" class="portal-main container">
+    <aside class="admin-sidebar" aria-label="Admin navigation">
+      <span class="admin-sidebar-label">WORKSPACE</span>
+      <nav>
+        <a class="admin-sidebar-link active" href="#admin-dashboard"><span aria-hidden="true">⌂</span> Overview</a>
+        <a class="admin-sidebar-link" href="#admin-requests-panel"><span aria-hidden="true">▤</span> Requests</a>
+        <a class="admin-sidebar-link" href="#announcement-editor-panel"><span aria-hidden="true">＋</span> Add announcement</a>
+        <a class="admin-sidebar-link" href="#admin-announcements"><span aria-hidden="true">i</span> Community notices</a>
+      </nav>
+      <p class="admin-sidebar-note">Manage requests and share updates with your community.</p>
+    </aside>
+    <div class="admin-content">
     <section class="portal-hero staff-hero">
       <div class="eyebrow"><span class="eyebrow-line"></span> Staff workspace</div>
       <h1>Community support, <span>at a glance.</span></h1>
@@ -33,15 +44,19 @@
      
     </section>
     <section class="staff-dashboard-section" id="admin-dashboard" aria-label="Staff dashboard">
+      <div class="dashboard-section-heading">
+        <div><span class="card-kicker">OVERVIEW</span><h2>Today at a glance</h2></div>
+        <p>A quick snapshot of the requests and community notices shown below.</p>
+      </div>
       <div class="admin-stats row g-3">
         <div class="col-6 col-lg-3"><div class="stat-card"><span>Open requests</span><strong id="open-count">12</strong><small>Requests on this page</small></div></div>
         <div class="col-6 col-lg-3"><div class="stat-card"><span>Awaiting review</span><strong>5</strong><small>Requests on this page</small></div></div>
         <div class="col-6 col-lg-3"><div class="stat-card"><span>New ID inquiries</span><strong>8</strong><small>Inquiries on this page</small></div></div>
         <div class="col-6 col-lg-3"><div class="stat-card"><span>Announcements</span><strong id="notice-count">0</strong><small>Notices on this page</small></div></div>
       </div>
-      <div class="admin-panel">
+      <div class="admin-panel" id="admin-requests-panel">
         <div class="admin-panel-heading"><div><span class="card-kicker">REQUESTS</span><h2>Recent assistance requests</h2></div></div>
-        <div class="table-responsive"><table class="table align-middle admin-table"><thead><tr><th scope="col">Reference</th><th scope="col">Request</th><th scope="col">Municipality</th><th scope="col">Status</th><th scope="col">Action</th></tr></thead><tbody id="admin-requests">
+        <div class="table-responsive"><table class="table align-middle admin-table"><caption class="visually-hidden">Recent assistance requests and their current status</caption><thead><tr><th scope="col">Reference</th><th scope="col">Request</th><th scope="col">Municipality</th><th scope="col">Status</th><th scope="col">Action</th></tr></thead><tbody id="admin-requests">
           <tr data-id="EG-2048"><td><strong>EG-2048</strong></td><td>Medicine support</td><td>Boac</td><td><span class="status-badge status-review"><i></i> Under review</span></td><td><select class="form-select form-select-sm status-select" aria-label="Update status for EG-2048"><option>Received</option><option selected>Under review</option><option>Update available</option><option>Closed</option></select></td></tr>
           <tr data-id="EG-2051"><td><strong>EG-2051</strong></td><td>Food assistance</td><td>Mogpog</td><td><span class="status-badge status-received"><i></i> Received</span></td><td><select class="form-select form-select-sm status-select" aria-label="Update status for EG-2051"><option selected>Received</option><option>Under review</option><option>Update available</option><option>Closed</option></select></td></tr>
           <tr data-id="EG-2039"><td><strong>EG-2039</strong></td><td>Transportation</td><td>Gasan</td><td><span class="status-badge status-update"><i></i> Update available</span></td><td><select class="form-select form-select-sm status-select" aria-label="Update status for EG-2039"><option>Received</option><option>Under review</option><option selected>Update available</option><option>Closed</option></select></td></tr>
@@ -60,7 +75,7 @@
           </div>
         </section>
       </div>
-      <div class="admin-panel announcement-editor">
+      <div class="admin-panel announcement-editor" id="announcement-editor-panel">
         <div class="admin-panel-heading"><div><span class="card-kicker">COMMUNITY INFORMATION</span><h2>Add an announcement</h2></div></div>
         <form id="announcement-form" novalidate>
           <div class="row g-3">
@@ -74,13 +89,25 @@
         </form>
         <div class="form-feedback" id="announcement-feedback" role="status" aria-live="polite"></div>
       </div>
-      <div class="admin-panel">
+      <div class="admin-panel" id="admin-announcements">
         <div class="admin-panel-heading"><div><span class="card-kicker">COMMUNITY NOTICES</span><h2>Announcements</h2></div></div>
         <div class="row g-4" id="announcement-list" aria-live="polite" aria-label="Announcements"></div>
         <p class="announcement-empty admin-footnote" id="announcement-empty">No announcements have been added yet.</p>
       </div>
     </section>
+    </div>
     
+  <div class="status-confirm-backdrop switch-account-backdrop" id="switch-account-modal" hidden>
+    <section class="status-confirm-dialog switch-account-dialog" role="dialog" aria-modal="true" aria-labelledby="switch-account-title" aria-describedby="switch-account-message">
+      <span class="card-kicker">ACCOUNT</span>
+      <h2 id="switch-account-title">Switch accounts?</h2>
+      <p id="switch-account-message">You’ll return to the sign-in page, where you can choose a different portal.</p>
+      <div class="status-confirm-actions">
+        <button class="btn btn-outline-primary" id="switch-account-cancel" type="button">Stay here</button>
+        <button class="btn btn-primary" id="switch-account-confirm" type="button">Continue</button>
+      </div>
+    </section>
+  </div>
   <script src="app.js"></script>
 </body>
 </html>

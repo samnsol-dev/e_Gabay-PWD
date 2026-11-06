@@ -1,3 +1,6 @@
+The group used AI assistance during the preparation and refinement of selected project documentation. AI assistance was used for improving sentence structure, organizing ideas, checking grammar, and refining the descriptions of the proposed system. The group remains responsible for reviewing, verifying, and finalizing all submitted content.
+
+
 ## 8. AI DISCLOSURE PROGRESS
 
 | AI-assisted task | Affected section / file | Prompt used | Validation evidence |
@@ -12,5 +15,8 @@
 | Typography and color scheme enhancement | e-Gabay PWD Web Application (CSS and UI/UX Design) | "Improve the website's typography by making all text larger, clearer, and more readable. Apply this color palette consistently: 60% White (#FFFFFF), 30% Blue (#2E3192), and 10% Red (#EE1C25). Use Yellow (#FEF200) as an additional accent color. Maintain good contrast, accessibility, and visual consistency across all pages. Preserve all existing features and functionality." | The group reviewed the updated typography, color consistency, readability, and accessibility across all interfaces. The group also tested existing features to ensure that the visual changes did not affect application functionality. |
 | Role-based login and dashboard redirection | e-Gabay PWD Web Application (Login and Role-Based Access Control) | "Implement role-based login redirection. Redirect PWD Users to the PWD Dashboard, Caregivers to the Caregiver Dashboard, and Administrators to the Admin Dashboard. Ensure each role can only access its designated interface and authorized features. Preserve the existing UI design and functionality while reusing existing files and components." | The group tested the login redirection for each user role and verified that PWD Users, Caregivers, and Administrators were directed to their respective dashboards. The group also checked whether each role could only access its designated interface and authorized features. |
 | Separate PWD application forms | e-Gabay PWD Web Application (Application Forms) | "Create three separate HTML files for the following application forms: First-Time PWD ID Application, PWD ID Renewal, and Lost PWD ID Replacement. Each form should have its own dedicated HTML file and corresponding functionality." | The group checked whether each application form had its own HTML file, reviewed the form fields, and tested the available JavaScript interactions. |
+
+
+
 
 

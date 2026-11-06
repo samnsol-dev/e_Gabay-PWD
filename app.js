@@ -6,12 +6,54 @@
   const notificationItems = document.querySelector("#notification-items");
   const notificationFeedback = document.querySelector("#notification-feedback");
 
+  const switchAccountModal = document.querySelector("#switch-account-modal");
+  const switchAccountCancel = document.querySelector("#switch-account-cancel");
+  const switchAccountConfirm = document.querySelector("#switch-account-confirm");
+  let switchAccountDestination = "";
+  let switchAccountTrigger = null;
+
+  function closeSwitchAccountDialog() {
+    if (!switchAccountModal || switchAccountModal.hidden) return;
+    switchAccountModal.hidden = true;
+    switchAccountDestination = "";
+    switchAccountTrigger?.focus();
+    switchAccountTrigger = null;
+  }
+
   document.querySelectorAll('.portal-nav-links a[href="login.html"]').forEach((link) => {
     link.addEventListener("click", (event) => {
-      if (!window.confirm("Are you sure you want to switch accounts?")) {
-        event.preventDefault();
-      }
+      if (!switchAccountModal || !switchAccountCancel || !switchAccountConfirm) return;
+      event.preventDefault();
+      switchAccountDestination = link.href;
+      switchAccountTrigger = link;
+      switchAccountModal.hidden = false;
+      switchAccountCancel.focus();
     });
+  });
+
+  switchAccountCancel?.addEventListener("click", closeSwitchAccountDialog);
+  switchAccountConfirm?.addEventListener("click", () => {
+    if (switchAccountDestination) window.location.assign(switchAccountDestination);
+  });
+  switchAccountModal?.addEventListener("click", (event) => {
+    if (event.target === switchAccountModal) closeSwitchAccountDialog();
+  });
+  document.addEventListener("keydown", (event) => {
+    if (!switchAccountModal || switchAccountModal.hidden) return;
+    if (event.key === "Escape") {
+      closeSwitchAccountDialog();
+      return;
+    }
+    if (event.key === "Tab") {
+      const focusable = [switchAccountCancel, switchAccountConfirm].filter(Boolean);
+      if (event.shiftKey && document.activeElement === focusable[0]) {
+        event.preventDefault();
+        focusable[focusable.length - 1].focus();
+      } else if (!event.shiftKey && document.activeElement === focusable[focusable.length - 1]) {
+        event.preventDefault();
+        focusable[0].focus();
+      }
+    }
   });
 
   function loadNotifications() {
@@ -120,15 +162,35 @@
   });
   renderNotifications();
 
-  const caregiverPatientName = document.querySelector("#caregiver-patient-name");
-  if (caregiverPatientName) {
+  let caregiverPatientNameForSession = "";
+  try {
+    const isCaregiverSession = window.sessionStorage.getItem("egabay-account-role") === "caregiver";
+    const patientName = isCaregiverSession
+      ? window.sessionStorage.getItem("egabay-caregiver-patient-name")
+      : null;
+    if (patientName) caregiverPatientNameForSession = patientName;
+  } catch (error) {
+    const applicationFeedback = document.querySelector("#id-form-feedback");
+    if (applicationFeedback) {
+      applicationFeedback.textContent = `Caregiver details could not be loaded for this session: ${error.message}`;
+    }
+  }
+  const pwdAccountName = document.querySelector("#pwd-account-name");
+  if (pwdAccountName) {
     try {
-      const patientName = window.sessionStorage.getItem("egabay-caregiver-patient-name");
-      if (patientName) {
-        caregiverPatientName.textContent = `Processing documents for ${patientName}`;
-      }
+      pwdAccountName.textContent = window.sessionStorage.getItem("egabay-account-name") || "PWD User";
     } catch (error) {
-      caregiverPatientName.textContent = `Patient details could not be loaded for this session: ${error.message}`;
+      pwdAccountName.textContent = `Profile could not be loaded for this session: ${error.message}`;
+    }
+  }
+  if (caregiverPatientNameForSession) {
+    const assistanceApplicantName = document.querySelector("#request-name");
+    const idApplicantName = document.querySelector("#id-applicant-name");
+    if (assistanceApplicantName && !assistanceApplicantName.value) {
+      assistanceApplicantName.value = caregiverPatientNameForSession;
+    }
+    if (idApplicantName && !idApplicantName.value) {
+      idApplicantName.value = caregiverPatientNameForSession;
     }
   }
 

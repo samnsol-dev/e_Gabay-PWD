@@ -54,6 +54,11 @@
     };
     const role = roleSelect.value;
     try {
+      if (mode === "register") {
+        window.sessionStorage.setItem("egabay-account-name", nameInput.value.trim());
+      } else {
+        window.sessionStorage.removeItem("egabay-account-name");
+      }
       if (mode === "register" && role === "caregiver") {
         window.sessionStorage.setItem("egabay-caregiver-patient-name", patientNameInput.value.trim());
       } else {
