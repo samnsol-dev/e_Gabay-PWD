@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2E3192">
+  <meta name="description" content="Admin dashboard for Marinduque.">
+  <title>Admin portal — e-Gabay Marinduque</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+</head>
+<body class="portal-page staff-page">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <nav class="navbar" aria-label="Main navigation">
+      <div class="container">
+        <a class="navbar-brand brand-lockup" href="index.html" aria-label="e-Gabay PWD home">
+          <span class="brand-mark" aria-hidden="true"><span>e</span></span>
+          <span class="brand-text">e-Gabay <span>PWD</span><small>MARINDUQUE</small></span>
+        </a>
+        <div class="portal-nav-links"><span class="portal-role-label">ADMIN PORTAL</span><a href="login.html">Switch account</a></div>
+      </div>
+    </nav>
+  </header>
+  <main id="main-content" class="portal-main container">
+    <section class="portal-hero staff-hero">
+      <div class="eyebrow"><span class="eyebrow-line"></span> Staff workspace</div>
+      <h1>Community support, <span>at a glance.</span></h1>
+      <p class="portal-intro">Review request records, update their status, and draft community information.</p>
+     
+    </section>
+    <section class="staff-dashboard-section" id="admin-dashboard" aria-label="Staff dashboard">
+      <div class="admin-stats row g-3">
+        <div class="col-6 col-lg-3"><div class="stat-card"><span>Open requests</span><strong id="open-count">12</strong><small>Requests on this page</small></div></div>
+        <div class="col-6 col-lg-3"><div class="stat-card"><span>Awaiting review</span><strong>5</strong><small>Requests on this page</small></div></div>
+        <div class="col-6 col-lg-3"><div class="stat-card"><span>New ID inquiries</span><strong>8</strong><small>Inquiries on this page</small></div></div>
+        <div class="col-6 col-lg-3"><div class="stat-card"><span>Announcements</span><strong id="notice-count">0</strong><small>Notices on this page</small></div></div>
+      </div>
+      <div class="admin-panel">
+        <div class="admin-panel-heading"><div><span class="card-kicker">REQUESTS</span><h2>Recent assistance requests</h2></div></div>
+        <div class="table-responsive"><table class="table align-middle admin-table"><thead><tr><th scope="col">Reference</th><th scope="col">Request</th><th scope="col">Municipality</th><th scope="col">Status</th><th scope="col">Action</th></tr></thead><tbody id="admin-requests">
+          <tr data-id="EG-2048"><td><strong>EG-2048</strong></td><td>Medicine support</td><td>Boac</td><td><span class="status-badge status-review"><i></i> Under review</span></td><td><select class="form-select form-select-sm status-select" aria-label="Update status for EG-2048"><option>Received</option><option selected>Under review</option><option>Update available</option><option>Closed</option></select></td></tr>
+          <tr data-id="EG-2051"><td><strong>EG-2051</strong></td><td>Food assistance</td><td>Mogpog</td><td><span class="status-badge status-received"><i></i> Received</span></td><td><select class="form-select form-select-sm status-select" aria-label="Update status for EG-2051"><option selected>Received</option><option>Under review</option><option>Update available</option><option>Closed</option></select></td></tr>
+          <tr data-id="EG-2039"><td><strong>EG-2039</strong></td><td>Transportation</td><td>Gasan</td><td><span class="status-badge status-update"><i></i> Update available</span></td><td><select class="form-select form-select-sm status-select" aria-label="Update status for EG-2039"><option>Received</option><option>Under review</option><option selected>Update available</option><option>Closed</option></select></td></tr>
+        </tbody></table></div>
+        
+      </div>
+      <div class="admin-feedback" id="admin-feedback" role="status" aria-live="polite"></div>
+      <div class="status-confirm-backdrop" id="status-confirm-modal" hidden>
+        <section class="status-confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="status-confirm-title" aria-describedby="status-confirm-message">
+          <span class="card-kicker">CONFIRM STATUS UPDATE</span>
+          <h2 id="status-confirm-title">Update request status?</h2>
+          <p id="status-confirm-message"></p>
+          <div class="status-confirm-actions">
+            <button class="btn btn-outline-primary" id="status-confirm-cancel" type="button">Cancel</button>
+            <button class="btn btn-primary" id="status-confirm-apply" type="button">Confirm update</button>
+          </div>
+        </section>
+      </div>
+      <div class="admin-panel announcement-editor">
+        <div class="admin-panel-heading"><div><span class="card-kicker">COMMUNITY INFORMATION</span><h2>Add an announcement</h2></div></div>
+        <form id="announcement-form" novalidate>
+          <div class="row g-3">
+            <div class="col-md-4"><label class="form-label" for="announcement-title">Announcement title</label><input class="form-control" id="announcement-title" name="title" maxlength="100" required placeholder="e.g. Community orientation"></div>
+            <div class="col-md-3"><label class="form-label" for="announcement-date">Date</label><input class="form-control" id="announcement-date" name="date" type="date" required></div>
+            <div class="col-md-3"><label class="form-label" for="announcement-location">Place</label><input class="form-control" id="announcement-location" name="location" maxlength="80" required placeholder="e.g. Boac Municipal Hall"></div>
+            <div class="col-md-2"><label class="form-label" for="announcement-category">Category</label><select class="form-select" id="announcement-category" name="category" required><option value="programs">Programs</option><option value="assistance">Assistance</option><option value="general">General</option></select></div>
+            <div class="col-12"><label class="form-label" for="announcement-details">Description</label><textarea class="form-control" id="announcement-details" name="details" rows="3" maxlength="600" required placeholder="Share useful details and how people can learn more."></textarea></div>
+            <div class="col-12"><button class="btn btn-primary" type="submit">Publish announcement <span aria-hidden="true">→</span></button></div>
+          </div>
+        </form>
+        <div class="form-feedback" id="announcement-feedback" role="status" aria-live="polite"></div>
+      </div>
+      <div class="admin-panel">
+        <div class="admin-panel-heading"><div><span class="card-kicker">COMMUNITY NOTICES</span><h2>Announcements</h2></div></div>
+        <div class="row g-4" id="announcement-list" aria-live="polite" aria-label="Announcements"></div>
+        <p class="announcement-empty admin-footnote" id="announcement-empty">No announcements have been added yet.</p>
+      </div>
+    </section>
+    
+  <script src="app.js"></script>
+</body>
+</html>
